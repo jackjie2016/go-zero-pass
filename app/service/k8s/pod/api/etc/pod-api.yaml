@@ -1,0 +1,14 @@
+Name: pod-api
+Host: 0.0.0.0
+Port: 8080
+
+PodRpc:
+  Endpoints:
+    - 127.0.0.1:8081
+#UserRpc:
+#  Endpoints:
+#    - 127.0.0.1:8001
+Prometheus:
+  Host: 0.0.0.0
+  Port: 4003
+  Path: /metrics

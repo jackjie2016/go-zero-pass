@@ -1,0 +1,38 @@
+syntax = "v1"
+
+info(
+	title: "core service"
+	desc: "this is the api describe file for core services"
+	author: "Ryan Su"
+	email: "yuansu.china.work@gmail.com"
+	version: "v1.0"
+)
+
+import "role.api"
+import "user.api"
+import "menu.api"
+import "captcha.api"
+import "apis.api"
+import "authority.api"
+import "dictionary.api"
+import "oauth.api"
+import "base.api"
+
+@server(
+	group: core
+)
+
+service core {
+	// swagger:route get /core/health core healthCheck
+	// Check the system status | 检查系统状态
+	@handler healthCheck
+	get /core/health
+	
+	// swagger:route get /core/init/database core initDatabase
+	// Initialize database | 初始化数据库
+	// Responses:
+	//   200: SimpleMsg
+	//   500: SimpleMsg
+	@handler initDatabase
+	get /core/init/database returns (SimpleMsg)
+}

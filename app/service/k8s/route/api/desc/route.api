@@ -1,0 +1,53 @@
+syntax = "v1"
+
+info (
+	title: // TODO: add title
+	desc: // TODO: add description
+	author: ""
+	email: ""
+)
+type request {
+	Id int64 `path:"id"`
+}
+type Delrequest {
+	Id int64 `json:"id"`
+}
+
+type RouteInfo {
+	// TODO: add members here and delete this comment
+	Id     int64            `json:"id"`
+	Method string           `json:"method"`
+	Header map[string]*Pair `json:"header"`
+	Get    map[string]*Pair `json:"get"`
+	Post   map[string]*Pair `json:"post"`
+	Body   string           `json:"body"`
+	Url    string           `json:"url"`
+}
+
+type Pair {
+	Key    string   `json:"key"`
+	Values []string `json:"values"`
+}
+
+type response {
+	// TODO: add members here and delete this comment
+	StatusCode int64            `json:"statusCode"`
+	Header     map[string]*Pair `json:"header"`
+	Body       string           `json:"body"`
+}
+
+service route-api {
+	
+	@handler FindRouteById // TODO: set handler name and delete this comment
+	get /route/FindRouteById/id/:Id(request) returns (RouteInfo)
+	
+	@handler AddRoute // TODO: set handler name and delete this comment
+	post /route/AddRoute (RouteInfo) returns (response)
+	
+	@handler DeleteRouteById // TODO: set handler name and delete this comment
+	delete /route/DeleteRouteById/id/:id (RouteInfo) returns (response)
+	
+	@handler UpdateRoute // TODO: set handler name and delete this comment
+	put /route/UpdateRoute (RouteInfo) returns (response)
+	
+}

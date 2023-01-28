@@ -1,0 +1,69 @@
+version: '3'
+
+volumes:
+  mysql:
+  redis:
+
+networks:
+  simple-admin:
+    driver: bridge
+
+services:
+#  mysql:
+#    image: mysql:8.0.21
+#    container_name: mysql
+#    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+#    restart: always
+#    ports:
+#      - '3306:3306'
+#    environment:
+#      MYSQL_DATABASE: 'simple-admin'
+#      MYSQL_ROOT_PASSWORD: '123456'
+#    volumes:
+#      - mysql:/var/lib/mysql
+#    networks:
+#      simple-admin:
+#        aliases:
+#          - mysqlserver
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.1'
+#          memory: 300M
+#        reservations:
+#          cpus: '0.05'
+#          memory: 200M
+#
+#  redis:
+#    image: redis:7.0.5-alpine
+#    container_name: redis
+#    restart: always
+#    ports:
+#      - '6379:6379'
+#    volumes:
+#      - redis:/data
+#    networks:
+#      simple-admin:
+#        aliases:
+#          - redisserver
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.1'
+#          memory: 300M
+#        reservations:
+#          cpus: '0.05'
+#          memory: 200M
+
+  #添加监控镜像
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9191:9090"
+  #监控看板，默认密码为admin/admin
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"

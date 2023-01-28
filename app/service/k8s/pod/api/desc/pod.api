@@ -1,0 +1,82 @@
+syntax = "v1"
+
+info (
+	title: // TODO: add title
+	desc: // TODO: add description
+	author: ""
+	email: ""
+)
+
+type Request {
+	Id int64 `path:"Id"`
+}
+
+type response {
+	// TODO: add members here and delete this comment
+}
+// The basic response with data | 基础带数据信息
+// swagger:response BaseMsg
+type BaseMsg {
+	Code int32  `json:"code"`
+	Msg  string `json:"msg"`
+	Data string `json:"data"`
+}
+
+// The basic response without data | 基础不带数据信息
+// swagger:response BaseMsg
+type BaseResp {
+	Code int32  `json:"code"`
+	Msg  string `json:"msg"`
+}
+
+type (
+	FindAll {
+	}
+	PodList {
+		PodInfo []PodInfo `json:"pod_info"`
+	}
+
+	PodInfo {
+		Id            int64     `json:"id"`
+		PodNamespace  string    `json:"pod_namespace"`
+		PodName       string    `json:"pod_name"`
+		PodTeamId     string    `json:"pod_team_id"`
+		PodCpuMax     float32   `json:"pod_cpu_max"`
+		PodReplicas   int32     `json:"pod_replicas"`
+		PodMemoryMax  float32   `json:"pod_memory_max"`
+		PodPort       []PodPort `json:"pod_port"`
+		PodEnv        []PodEnv  `json:"pod_env"`
+		PodPullPolicy string    `json:"pod_pull_policy"`
+		PodRestart    string    `json:"pod_restart"`
+		PodType       string    `json:"pod_type"`
+		PodImage      string    `json:"pod_image"`
+	}
+	PodPort {
+		PodId         int64  `json:"pod_id"`
+		ContainerPort int32  `json:"container_port"`
+		Protocol      string `json:"protocol"`
+	}
+
+	PodEnv {
+		PodId    int64  `json:"pod_id"`
+		EnvKey   string `json:"env_key"`
+		EnvValue string `json:"env_value"`
+	}
+)
+
+service pod-api {
+	
+	@handler FindPodById
+	get /FindPodById/Id/:Id (Request) returns(PodInfo)
+	@handler Findallpod
+	get /FindAllPod(FindAll) returns(PodList)
+	
+	@handler AddPod
+	post /AddPod(PodInfo)
+	
+	@handler DeletePodById
+	delete /DeletePodById/Id/:Id (Request)
+	
+	@handler UpdatePod
+	post /UpdatePod(PodInfo)
+}

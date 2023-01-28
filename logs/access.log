@@ -1,0 +1,1 @@
+{"@timestamp":"2022-12-27T15:53:26.839+08:00","caller":"prometheus/agent.go:35","content":"Starting prometheus agent at 0.0.0.0:4002","level":"info"}

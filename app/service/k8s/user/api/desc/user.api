@@ -1,0 +1,28 @@
+syntax = "v1"
+
+info (
+	title: // TODO: add title
+	desc: // TODO: add description
+	author: ""
+	email: ""
+)
+
+type Request {
+	// TODO: add members here and delete this comment
+	Id int64 `path:"id"`
+}
+
+type Response {
+	// TODO: add members here and delete this comment
+}
+
+service user-api {
+	@handler GetUser // TODO: set handler name and delete this comment
+	get /users/id/:id(Request) returns(Response)
+	
+	@handler CreateUser // TODO: set handler name and delete this comment
+	post /users/create(Request)
+	
+	@handler GreetHandler
+	get /greet/from/:id(Request) returns (Response)
+}
